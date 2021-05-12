@@ -8,8 +8,17 @@
     "start": "next start"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "csv-writer": "^1.6.0",
+    "formidable": "^1.2.2",
+    "fs": "0.0.1-security",
+    "fs-extra": "^10.0.0",
+    "moment": "^2.29.1",
+    "multer": "^1.4.2",
     "next": "10.2.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "next-connect": "^0.10.1",
+    "react": "^17.0.2",
+    "react-dom": "17.0.2",
+    "sort-json-array": "^0.1.7"
   }
 }
