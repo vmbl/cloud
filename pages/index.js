@@ -53,9 +53,10 @@ class SimpleReactFileUpload extends React.Component {
   render() {
     return (
       <Layout>
-        <div class="container" style={{width: '30%'}}>
-          <h2>Upload Section</h2>
+        <div class="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+         
           <form onSubmit={this.onFormSubmit}>
+            <h2>Upload Section</h2>
             <div class="form-group">
               <label>Brand:</label>
               <select class="form-control" name="brand" onChange={this.onChangeField} required>
