@@ -44,6 +44,7 @@ class Register extends React.Component {
         asm: event.target.asm.value,
         name: event.target.name.value,
         mobile: event.target.mobile.value,
+        address: event.target.address.value,
         email: event.target.email.value,
         states: JSON.stringify(this.state.allStates),
         cities: JSON.stringify(this.state.allCities)
@@ -120,7 +121,7 @@ class Register extends React.Component {
                 <form onSubmit={this.registerUser}>
                   <div class="form-group">
                     <label for="brand">Brand</label>
-                    <select name="brand" class="form-control" id="brand" >
+                    <select name="brand" class="form-control" id="brand" required>
                       <option value="livguard">Livguard Solar</option>
                       <option value="Livfast">LivFast Solar</option>
                       <option value="both">Both</option>
@@ -128,7 +129,7 @@ class Register extends React.Component {
                   </div>
                   <div class="form-group">
                     <label for="post">Position</label>
-                    <select name="post" class="form-control" id="post" >
+                    <select name="post" class="form-control" id="post" required>
                       <option value="ASM">ASM</option>
                       <option value="SE">SE</option>
                       <option value="TSI">TSI</option>
@@ -154,15 +155,19 @@ class Register extends React.Component {
                  
                   <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="name" name="name" class="form-control" id="name" />
+                    <input type="name" name="name" class="form-control" id="name" required/>
                   </div>
                   <div class="form-group">
                     <label for="mobile">Mobile</label>
-                    <input type="text" name="mobile" max="10" class="form-control" id="mobile" required/>
+                    <input type="tel" name="mobile" maxlength="10" pattern="[0-9]{10}" class="form-control" id="mobile" required/>
                   </div>
                   <div class="form-group">
                     <label for="email">Company Email address:</label>
                     <input type="email" name="email" placeholder="Official Email"  class="form-control" id="email" />
+                  </div>
+                  <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" name="address" placeholder="Address"  class="form-control" id="address" />
                   </div>
                   <div class="row">
                     <div class="col-sm-6 col-md-6">
