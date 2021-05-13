@@ -36,8 +36,6 @@ class Register extends React.Component {
   registerUser = async event => {
 
     event.preventDefault()
-    
-    console.log("JSONOBJECT", JSON.stringify(this.state.allStates))
     var sendReq = {
         brand: event.target.brand.value,
         post: event.target.post.value,
@@ -50,7 +48,6 @@ class Register extends React.Component {
         cities: JSON.stringify(this.state.allCities)
     }
 
-    console.log("SEND REQ", sendReq)
     const res = await fetch(
       `${process.env.basepath}api/register/`,
       {
@@ -61,7 +58,19 @@ class Register extends React.Component {
         method: 'POST'
       }
     ).then((response) => response.json());
-    console.log("REST", res)
+    this.showStates = []
+    this.showCities = []
+
+    document.querySelector("#selectall").checked = false;
+    var citySelectAll = document.querySelectorAll(".citycheck")
+    citySelectAll.forEach((checkbox) => { 
+        checkbox.checked = false
+    }); 
+
+    var stateSelectAll = document.querySelectorAll(".statecheck")
+    stateSelectAll.forEach((checkbox) => { 
+        checkbox.checked = false
+    });
     alert("User details added successfully!")
   }
 
@@ -81,17 +90,37 @@ class Register extends React.Component {
             this.showStates.splice(value, 1)
             this.setState({ allStates: this.showStates });
         }
-      } else {
+      } else if(event.target.name == "allCities") {
         const target = event.target;
         var value = target.value;
         if(target.checked){
-            this.showCities.push(value)
-            this.setState({ allCities: this.showCities }); 
-        } else {
-          this.showCities.splice(value, 1)
+          this.showCities.push(value)
           this.setState({ allCities: this.showCities });
+        } else {        
+          this.showCities.splice(value, 1)   
+          this.setState({ allCities: this.showCities });
+          document.querySelector("#selectall").checked = false;
         }
-      }  
+      } else if(event.target.name == "selectall") {
+        this.showCities = []
+        const target = event.target;
+        var value = target.value;
+        if(target.checked) {
+          var citySelectAll = document.querySelectorAll(".citycheck")
+          citySelectAll.forEach((checkbox) => {
+              checkbox.checked = true
+              this.showCities.push(checkbox.value)
+          });
+          this.setState({ allCities: this.showCities });
+        } else {
+          var citySelectAll = document.querySelectorAll(".citycheck")
+          citySelectAll.forEach((checkbox) => { 
+              this.showCities.splice(checkbox.value, 1)             
+              checkbox.checked = false
+          }); 
+          this.setState({ allCities: this.showCities });         
+        }
+      }
 
       
       /*for(var ind in this.state.allStates) {
@@ -111,8 +140,7 @@ class Register extends React.Component {
     const { allStates } = this.state
     const cityOptions = cityMaps[mapCity];
     //alert(cityOptions)
-    console.log("inside render", allStates)
-    console.log("BASE", process.env.basepath)
+  
     return (
         <Layout>
           <div class="container-fluid">
@@ -176,7 +204,7 @@ class Register extends React.Component {
                         <ul class="list-group list" style={{ height: 200, overflow: 'scroll' }}>                       
                           {options.map((o, index) => (
                             <li class="list-group-item">
-                              <input type="checkbox" name="allStates" value={o} class="form-check-input" id={`${index}_state`} onChange={this.handleInputChange} />
+                              <input type="checkbox" name="allStates" value={o} class="form-check-input statecheck" id={`${index}_state`} onChange={this.handleInputChange} />
                               <label class="form-check-label" for={`${index}_state`}>{o}</label>
                             </li>
                           ))}
@@ -187,10 +215,14 @@ class Register extends React.Component {
                       <div class="form-group">
                         <label for="city">City</label>
                         <ul class="list-group" style={{ height: 200,overflow: 'scroll' }}>
+                          <li class="list-group-item">
+                            <input type="checkbox" name="selectall" value="all" class="form-check-input" id="selectall"  onChange={this.handleInputChange} />
+                            <label class="form-check-label" for="selectall">Select All</label>
+                          </li>
                           {allStates.map((o, index) => (
                             cityMaps[o].map((sho, indexv) => (
                               <li class="list-group-item">
-                                <input type="checkbox" name="allCities" value={sho} class="form-check-input" id={`${indexv}_city`} onChange={this.handleInputChange} />
+                                <input type="checkbox" name="allCities" value={sho} class="form-check-input citycheck" id={`${indexv}_city`} onChange={this.handleInputChange} />
                                 <label class="form-check-label" for={`${indexv}_city`}>{sho}</label>
                               </li>
                             ))
