@@ -29,11 +29,12 @@ const Layout = ({ children }) => (
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Upload</a></li>
+          { /* 
+           <li class="active"><a href="/">Upload</a></li>
             <li><a href="/product">Product Catalogue</a></li>
             <li><a href="#">Data Sheets</a></li>
-            <li><a href="#">Price Documents</a></li>
-            <li><a href="/register">LivSol Registration</a></li>
+            <li><a href="#">Price Documents</a></li> */ }
+            <li><a href="/register" active>LivSol Registration</a></li>
           </ul>
     
         </div>
