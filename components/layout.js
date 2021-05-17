@@ -2,8 +2,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Head from 'next/head'
 
-
 const Layout = ({ children }) => (
+
   <>
      <Head>
         <title>Livguard Cloud Application</title>
@@ -29,12 +29,14 @@ const Layout = ({ children }) => (
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
-          { /* 
-           <li class="active"><a href="/">Upload</a></li>
-            <li><a href="/product">Product Catalogue</a></li>
-            <li><a href="#">Data Sheets</a></li>
-            <li><a href="#">Price Documents</a></li> */ }
-            <li><a href="/register" active>LivSol Registration</a></li>
+          
+           <li><a href="/">Upload</a></li>
+            <li><a href="/products">Product Catalogue</a></li>
+            <li><a href="/solutions">Solution Catalogue</a></li>
+            <li><a href="/datasheets">Data Sheets</a></li>
+            <li><a href="/price">Price Documents</a></li> 
+            <li><a href="/license">License & Other Documents</a></li>
+            <li><a href="/register">LivSol Registration</a></li>
           </ul>
     
         </div>

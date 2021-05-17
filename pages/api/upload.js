@@ -32,20 +32,23 @@ export default async (req, res) => {
             console.log("EXTENSION", ext)
             form.extType = ext
 
-            file.path = `${form.uploadDir}${req.query.brand}/${req.query.type}/${req.query.type}_${moment.now()}.${ext}`;
+            file.path = `${form.uploadDir}${req.query.brand}/${req.query.type}/${getExt[0]}_${moment().format("YY-MM-DD_h:mm")}.${ext}`;
 
             fs.emptyDirSync(`${form.uploadDir}${req.query.brand}/${req.query.type}/latest/`)           
 	    })
 	    .on('file', (name, file) => {
-
-	      	fs.copyFile(file.path, `${form.uploadDir}${req.query.brand}/${req.query.type}/latest/file.${form.extType}`, (err) => {
-				if (err) {
-					console.log("Error Found:", err);
-				}
-				else {
-					console.log("\nFile Contents of copied_file:")
-				}
-			});
+	    	if(req.query.type == "product" || req.query.type == "solution" || req.query.type == "datasheets") {
+	    		var getExt = file.name.split(".");
+	    		fs.copyFile(file.path, `${form.uploadDir}${req.query.brand}/${req.query.type}/latest/${getExt[0]}_latest_${moment().format("YY-MM-DD_h:mm")}.${form.extType}`, (err) => {
+					if (err) {
+						console.log("Error Found:", err);
+					}
+					else {
+						console.log("\nFile Contents of copied_file:")
+					}
+				});
+		    }
+	      
 	  	})
 	    .on('aborted', () => {
 	      	console.error('Request aborted by the user')

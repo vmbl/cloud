@@ -71,8 +71,9 @@ class SimpleReactFileUpload extends React.Component {
                 <option value="">--Choose Type Here</option>
                 <option value="product">Product Catalogue</option>
                 <option value="solution">Solution Catalogue</option>
-                <option value="price">Price Details</option>
                 <option value="datasheets">Datasheets</option>
+                <option value="price">Price Details</option>
+                <option value="license">License & Other Documents</option>
               </select>
             </div>
             <div class="form-group">
