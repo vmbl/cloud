@@ -39,7 +39,7 @@ export default async (req, res) => {
 	    .on('file', (name, file) => {
 	    	if(req.query.type == "product" || req.query.type == "solution" || req.query.type == "datasheets") {
 	    		var getExt = file.name.split(".");
-	    		fs.copyFile(file.path, `${form.uploadDir}${req.query.brand}/${req.query.type}/latest/${getExt[0]}_latest_${moment().format("YY-MM-DD_h:mm")}.${form.extType}`, (err) => {
+	    		fs.copyFile(file.path, `${form.uploadDir}${req.query.brand}/${req.query.type}/latest/${req.query.type}_latest.${form.extType}`, (err) => {
 					if (err) {
 						console.log("Error Found:", err);
 					}
