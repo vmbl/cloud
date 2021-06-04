@@ -74,6 +74,7 @@ class Login extends React.Component {
               <input type="password" className="form-group" name="password" />
             </div>
             <button type="submit" className="btn btn-primary">Login</button>
+            { this.state.error == true && <p style={{ color: "red" }}>Enter valid credentials</p> }
           </form>
         </div>
       </Layout>

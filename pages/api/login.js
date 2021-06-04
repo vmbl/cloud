@@ -22,6 +22,8 @@ export default withIronSession(
         	req.session.set("user", { username, type });
         	await req.session.save();
         	res.status(200).json({'success': true, 'type': "user"});
+      } else {
+        res.status(200).json({'success': false});
       }
 
       //return res.status(403).send("");
