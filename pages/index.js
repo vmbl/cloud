@@ -1,86 +1,79 @@
 import React from 'react'
 import axios, { post } from 'axios';
-import Layout from '../components/layout'
+import Layout from '../components/loginlayout'
 import Head from 'next/head'
+import { useRouter } from "next/router";
+import Router from 'next/router'
 
-class SimpleReactFileUpload extends React.Component {
+class Login extends React.Component {
 
   constructor(props) {
     super(props);
     this.state ={
-      file:null,
+      error:false,
       type:null,
       brand:null
     }
-    this.onFormSubmit = this.onFormSubmit.bind(this)
-    this.onChange = this.onChange.bind(this)
-    this.onChangeField = this.onChangeField.bind(this)
+    this.loginUser = this.loginUser.bind(this)
   }
-  onFormSubmit(e){
-    e.preventDefault() // Stop form submit
-    //this.setState({type:e.target.})
-    this.fileUpload(this.state.file, this.state.type, this.state.brand).then((response)=>{
-      //console.log(response.data);
-      alert("Uploaded Successfully!")
-    })
-  }
-  onChange(e) {
-    this.setState({file:e.target.files[0]})
-  }
-  onChangeField(e) {
-    //alert(e.target.value)
-    if(e.target.name == 'type') {
-      this.setState({type:e.target.value})
-    } else {
-      this.setState({brand:e.target.value})
-    }
-    
-  }
-  fileUpload(file, type, brand){
-    const url = `api/upload?type=${type}&brand=${brand}`;
-    const formData = new FormData();
-    formData.append('file',file)
-    formData.append('type',type)
-    formData.append('brand',type)
-    const config = {
-        headers: {
-            'content-type': 'multipart/form-data'
+  loginUser = async e => {
+     
+      e.preventDefault() // Stop form submit
+      //this.setState({type:e.target.})
+      console.log(e.currentTarget.username.value);
+      console.log(e.currentTarget.password.value);
+      var url = `api/login`
+      var inData = {
+          'username' : e.currentTarget.username.value,
+          'password' : e.currentTarget.password.value
+      }
+
+      //const router = useRouter();
+
+      const config = {
+          headers: {
+              'content-type': 'application/json'
+          }
+      }
+      const res = await fetch(
+        `${process.env.basepath}api/login/`,
+        {
+          body: JSON.stringify(inData),
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'POST'
         }
-    }
-    return  post(url, formData,config)
+      ).then((response) => response.json());
+        console.log("RESPONSE", res);
+        if(res.success) {
+          if(res.type == "admin") {
+            Router.push('/upload', undefined, { shallow: true })
+          } else {
+            Router.push('/register', undefined, { shallow: true })
+          }
+        } else {
+          this.setState({ error: true });
+        }
   }
+
 
   render() {
     return (
       <Layout>
-        <div class="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
          
-          <form onSubmit={this.onFormSubmit}>
-            <h2>Upload Section</h2>
-            <div class="form-group">
-              <label>Brand:</label>
-              <select class="form-control" name="brand" onChange={this.onChangeField} required>
-                <option value="">--Choose Brand Here</option>
-                <option value="LG">Livguard</option>
-                <option value="LF">LivFast</option>
-              </select>
+          <form onSubmit={this.loginUser}>
+            <h2>Login Section </h2>
+            <div className="form-group">
+              <label>Username:</label>
+              <input type="text" className="form-group" name="username" />
             </div>
-            <div class="form-group">
-              <label>File Type:</label>
-              <select class="form-control" name="type" onChange={this.onChangeField} required>
-                <option value="">--Choose Type Here</option>
-                <option value="product">Product Catalogue</option>
-                <option value="solution">Solution Catalogue</option>
-                <option value="datasheets">Datasheets</option>
-                <option value="price">Price Details</option>
-                <option value="license">License & Other Documents</option>
-              </select>
+            <div className="form-group">
+              <label>Password :</label>
+              <input type="password" className="form-group" name="password" />
             </div>
-            <div class="form-group">
-              <label>Select File:</label>
-              <input type="file" class="form-control" onChange={this.onChange} required/>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary">Login</button>
           </form>
         </div>
       </Layout>
@@ -88,4 +81,4 @@ class SimpleReactFileUpload extends React.Component {
   }
 }
 
-export default SimpleReactFileUpload
+export default Login

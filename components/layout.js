@@ -2,7 +2,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Head from 'next/head'
 
-const Layout = ({ children }) => (
+
+const Layout = ({ children, type = "admin" }) => (
 
   <>
      <Head>
@@ -11,33 +12,43 @@ const Layout = ({ children }) => (
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
       </Head>
-    <div class="jumbotron" style={{ background: "white" }}>
-      <div class="container text-center">
+    <div className="jumbotron" style={{ background: "white" }}>
+      <div className="container text-center">
         <Image src="/logo.png" alt="Livguard Solar" width="170" height="64" />
         <p>Cloud Application</p>
       </div>
     </div>
 
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>                        
+    <nav className="navbar navbar-inverse">
+      <div className="container-fluid">
+        <div className="navbar-header">
+          <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span className="icon-bar"></span>
+            <span className="icon-bar"></span>
+            <span className="icon-bar"></span>                        
           </button>
         </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav">
+        <div className="collapse navbar-collapse" id="myNavbar">
+          {type == "admin" && 
+            <ul className="nav navbar-nav">
+              <li><a href="/upload">Upload</a></li>
+              <li><a href="/products">Product Catalogue</a></li>
+              <li><a href="/solutions">Solution Catalogue</a></li>
+              <li><a href="/datasheets">Data Sheets</a></li>
+              <li><a href="/price">Price Documents</a></li> 
+              <li><a href="/license">License & Other Documents</a></li>
+              <li><a href="/whitepapers">Whitepapers</a></li>
+              <li><a href="/register">LivSol Registration</a></li>
+           </ul> 
+        }
+
+        {type == "user" && 
+          <ul className="nav navbar-nav">
+              <li><a href="/register">LivSol Registration</a></li>
+           </ul> 
+
+        }
           
-           <li><a href="/">Upload</a></li>
-            <li><a href="/products">Product Catalogue</a></li>
-            <li><a href="/solutions">Solution Catalogue</a></li>
-            <li><a href="/datasheets">Data Sheets</a></li>
-            <li><a href="/price">Price Documents</a></li> 
-            <li><a href="/license">License & Other Documents</a></li>
-            <li><a href="/register">LivSol Registration</a></li>
-          </ul>
     
         </div>
       </div>

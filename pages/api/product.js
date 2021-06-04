@@ -4,7 +4,7 @@ import fs from 'fs'
 
 
 
-export default function handler(req, res) {
+/*export default function handler(req, res) {
 	const dir = './public/'
 	const files = fs.readdirSync(dir)
 	for (const file of files) {
@@ -12,7 +12,7 @@ export default function handler(req, res) {
 	}
   	res.status(200).json({ name: 'John Doe' })
 }
-
+*/
 
 
 export async function getData() {
