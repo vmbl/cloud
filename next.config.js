@@ -1,6 +1,6 @@
 module.exports = {
   //basePath: '/docs'
-  async redirects() {
+  /*async redirects() {
     return [
       {
         source: '/',
@@ -8,9 +8,9 @@ module.exports = {
         permanent: true,
       },
     ]
-  },
+  },*/
   env: {
     basepath: 'http://localhost:3000/',
-
+    APPLICATION_SECRET: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef",
   },
 }

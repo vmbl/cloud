@@ -13,7 +13,7 @@ export const getServerSideProps = withIronSession(
     const user = req.session.get("user");
     console.log(user);
     if (user) {
-      if(user.type == "user") {
+      if(user.type == "user" || user.type == "sale") {
         res.statusCode = 302
         res.setHeader('Location', `/`) // Replace <link> with your url link
         

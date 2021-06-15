@@ -1,9 +1,9 @@
 import React from 'react'
-import axios, { post } from 'axios';
 import Layout from '../components/loginlayout'
 import Head from 'next/head'
 import { useRouter } from "next/router";
 import Router from 'next/router'
+
 
 class Login extends React.Component {
 
@@ -16,6 +16,7 @@ class Login extends React.Component {
     }
     this.loginUser = this.loginUser.bind(this)
   }
+  
   loginUser = async e => {
      
       e.preventDefault() // Stop form submit
@@ -49,8 +50,10 @@ class Login extends React.Component {
         if(res.success) {
           if(res.type == "admin") {
             Router.push('/upload', undefined, { shallow: true })
-          } else {
+          } else if(res.type == "user") {
             Router.push('/register', undefined, { shallow: true })
+          } else if(res.type == "sale") {
+            Router.push('/products', undefined, { shallow: true })
           }
         } else {
           this.setState({ error: true });

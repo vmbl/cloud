@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import Head from 'next/head'
+import { applySession } from 'next-session';
 
 
 const Layout = ({ children, type = "admin" }) => (
-
+  
   <>
      <Head>
         <title>Livguard Cloud Application</title>
@@ -39,6 +40,17 @@ const Layout = ({ children, type = "admin" }) => (
               <li><a href="/license">License & Other Documents</a></li>
               <li><a href="/whitepapers">Whitepapers</a></li>
               <li><a href="/register">LivSol Registration</a></li>
+           </ul> 
+        }
+
+        {type == "sale" && 
+            <ul className="nav navbar-nav">
+              <li><a href="/products">Product Catalogue</a></li>
+              <li><a href="/solutions">Solution Catalogue</a></li>
+              <li><a href="/datasheets">Data Sheets</a></li>
+              <li><a href="/price">Price Documents</a></li> 
+              <li><a href="/license">License & Other Documents</a></li>
+              <li><a href="/whitepapers">Whitepapers</a></li>
            </ul> 
         }
 

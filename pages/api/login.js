@@ -1,10 +1,13 @@
 import { withIronSession } from "next-iron-session";
-
+import cookieCutter from 'cookie-cutter'
 const VALID_EMAIL_ADMIN = "Admin";
 const VALID_PASSWORD_ADMIN= "LivguardCloud123$";
 
 const VALID_EMAIL_USER = "Livsol";
 const VALID_PASSWORD_USER= "LivsolRegister123$";
+
+const VALID_EMAIL_SALE = "LFLGSales";
+const VALID_PASSWORD_SALE = "LFLGSALES123$";
 
 export default withIronSession(
   async (req, res) => {
@@ -22,6 +25,11 @@ export default withIronSession(
         	req.session.set("user", { username, type });
         	await req.session.save();
         	res.status(200).json({'success': true, 'type': "user"});
+      } else if (username === VALID_EMAIL_SALE && password === VALID_PASSWORD_SALE) {
+          var type = 'sale'
+          req.session.set("user", { username, type });
+          await req.session.save();
+          res.status(200).json({'success': true, 'type': "sale"});
       } else {
         res.status(200).json({'success': false});
       }
