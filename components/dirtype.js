@@ -59,7 +59,7 @@ class Dirtype extends React.Component {
             }
           
           <tr>
-            <td colspan="3" style={{ textAlign: 'center' }}>Old Versions</td>
+            <td colspan="3" style={{ textAlign: 'center' }}>Track Versions</td>
           </tr>
           <tr>
               <th>File Name</th>
