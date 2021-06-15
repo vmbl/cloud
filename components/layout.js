@@ -39,6 +39,7 @@ const Layout = ({ children, type = "admin" }) => (
               <li><a href="/price">Price Documents</a></li> 
               <li><a href="/license">License & Other Documents</a></li>
               <li><a href="/whitepapers">Whitepapers</a></li>
+              <li><a href="/videos">Training & Videos Docs</a></li>
               <li><a href="/register">LivSol Registration</a></li>
            </ul> 
         }
@@ -51,6 +52,7 @@ const Layout = ({ children, type = "admin" }) => (
               <li><a href="/price">Price Documents</a></li> 
               <li><a href="/license">License & Other Documents</a></li>
               <li><a href="/whitepapers">Whitepapers</a></li>
+              <li><a href="/videos">Training & Videos Docs</a></li>
            </ul> 
         }
 
