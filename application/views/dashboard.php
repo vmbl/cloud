@@ -75,7 +75,7 @@
                     </div>
                     <div class="form-group">
                        <label for="name">Name :</label>
-                       <input type="text" class="form-control" id="name">
+                       <input type="text" class="form-control" name="name" id="name">
                     </div>
                     <div class="form-group">
                        <label for="name">Mobile :</label>
@@ -84,6 +84,14 @@
                     <div class="form-group">
                        <label for="email">Company Email Address :</label>
                        <input type="email" name="email" class="form-control" id="email" required="">
+                    </div>
+                    <div class="form-group">
+                       <label for="email">Distributor Company Name:</label>
+                       <input type="text" name="distcompany" class="form-control ds" id="distycomp" >
+                    </div>
+                    <div class="form-group">
+                       <label for="email">Dealer Company Name:</label>
+                       <input type="text" name="dealercompany" class="form-control ds" id="dealercomp">
                     </div>
                     <div class="form-group">
                        <label for="email">Address :</label>
@@ -124,9 +132,25 @@
        
         if($(this).val() == "ASM" || $(this).val() == "TSI" || $(this).val() == "SE") {
           $("#email").attr("required", "required")
+          $(".ds").removeAttr("required")
         } else {
           $("#email").removeAttr("required")
+          $(".ds").removeAttr("required")
         }
+
+        if($(this).val() == "SED") { 
+          $(".ds").attr("required", "required")
+        } else if($(this).val() == "SDH" || $(this).val() == "SD") { 
+          //$("#dealercomp").removeAttr("required")
+          $(".ds").removeAttr("required")
+          $("#distycomp").attr("required", "required")
+        } else {
+           $("#distycomp").removeAttr("required")
+          $(".ds").removeAttr("required")
+        }
+
+        
+
       })
 
        /*$("form#regform").submit(function(e){

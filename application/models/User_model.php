@@ -107,6 +107,7 @@ class User_model extends CI_Model
     }
 
     public function registerLivsol($regData = array()) {
+        unset($regData['selectall']);
         if(!empty($regData)) {
             if(count($regData['allStates']) > 0) {
                 $allstates = implode("|", $regData['allStates']);
@@ -127,7 +128,7 @@ class User_model extends CI_Model
             if($query->id) {
                  $this->db->where('id', $query->id);
                  $this->db->update('livsolreg_data', $regData);
-                return false;
+                return true;
             } else {
                 $this->db->trans_start();
                 $this->db->insert('livsolreg_data', $regData);                
