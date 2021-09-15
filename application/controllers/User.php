@@ -100,6 +100,27 @@ class User extends BaseController
         
        
     }
+
+    public function download() {
+        ini_set('memory_limit','200M');
+      
+        $allData = $this->user_model->getaccounts();
+    
+        if(isset($_GET['csv']) && $_GET['csv'] == 'download') {        
+           ob_end_clean();
+            header('Content-Type: application/csv');
+            $filename = "accounts-".date('Y-m-d').".csv";
+            header("Content-Disposition: attachment; filename=$filename");
+            echo "Brand,Occupation,ASM,Name,Mobile,Email, Address, State, City, Distributor Company, Dealer Company".PHP_EOL;
+            foreach ($allData as $key => $value) {
+                    $occupation = (trim($value['post']) == 'TSI') ? 'SE' : trim($value['post']);
+                    echo $value['brand'].',"'.$value['post'].'",'.$value['asm'].',"'.$value['name'].'",'.$value['mobile'].",".$value['email'].',"'.$value['address'].'","'.$value['states'].'","'.$value['cities'].'","'.$value['distcompany'].'","'.$value['dealercompany'].'"'.PHP_EOL;
+             
+            }
+            exit();
+        }
+    }
+
     
     /**
      * This function is used to load the user list

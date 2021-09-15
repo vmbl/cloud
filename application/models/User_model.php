@@ -141,6 +141,21 @@ class User_model extends CI_Model
         }
     }
 
+    public function getaccounts() {
+
+        try {
+            $this->db->select('*');
+            //$this->db->group_by("phone");
+            $leadsData = $this->db->get('livsolreg_data');
+            //echo $this->db->last_query(); die();
+            //print_r($leadsData->result_array());exit();
+            return $leadsData->result_array();
+        } catch (Exception $e) {
+            return 0;
+        }
+
+    }
+
     public function trackuploads($dataIn = array(), $path = null) {
         
         if(count($dataIn) > 0) {
