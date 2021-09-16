@@ -43,6 +43,7 @@
                     <div class="form-group">
                       <label for="email">Brand :</label>
                       <select name="brand" class="form-control" id="brand" required>
+                        <option value="">--Select Brand--</option>
                         <option value="livguard">Livguard Solar</option>
                         <option value="Livfast">LivFast Solar</option>
                         <option value="both">Both</option>
@@ -71,6 +72,7 @@
                         <option value="61">Atul Sharma</option>
                         <option value="50">Mrityunjay</option>
                         <option value="49">Beljin</option>
+                        <option value="51">Vinay Kumar</option>
                       </select>
                     </div>
                     <div class="form-group">
